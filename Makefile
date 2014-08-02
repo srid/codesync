@@ -8,5 +8,9 @@ shell:
 	docker run -i -t --rm --entrypoint=/bin/bash ${IMG} -i
 
 run:
-	mkdir -p ${PWD}/simplepaas
-	docker run --rm -v ${PWD}/simplepaas:/code ${IMG}
+	mkdir -p ${PWD}/sample
+	docker run --name=codesync --rm \
+		-v ${PWD}/sample:/code ${IMG} ${SECRET}
+
+kill:
+	docker rm -vf codesync
